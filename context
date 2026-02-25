@@ -1,0 +1,110 @@
+# 4 Use Cases for Architect
+
+***
+
+## Use Case 1: The Non-Technical Founder
+
+**Who:** Priya, 28 — has a business idea, zero coding knowledge
+
+**Situation:**
+> *"I want to build an app where local tutors can list their services and students can book sessions. I have no idea where to start."*
+
+**What She Does:**
+1. Opens Architect → types her idea
+2. Answers 7 MCQ questions (B2C, marketplace model, mobile + web)
+3. Research phase finds: "Superprof and UrbanPro dominate but have poor UX and no real-time chat"
+4. Picks "Warm & Friendly" design direction
+5. Downloads `architect-bundle.md`
+6. Opens Cursor → pastes file → says "Build this"
+
+**What She Gets:**
+- Validation that 10,000+ Reddit users complain about tutor discovery
+- Full PRD, database schema, API spec
+- Recommended stack: Next.js + Supabase + Stripe
+- 5-step MVP plan starting from scratch
+
+**Time saved:** 3–4 days of manual research and planning → **20 minutes**
+
+***
+
+## Use Case 2: The Indie Hacker
+
+**Who:** Arjun, 24 — developer, wants to launch a SaaS fast
+
+**Situation:**
+> *"I want to build a tool that lets startup teams track their weekly OKRs without the complexity of Jira or Notion."*
+
+**What He Does:**
+1. Opens Architect → enters idea
+2. MCQ answers: B2B, small teams, subscription model, ASAP launch
+3. Research finds: "Linear is loved but no OKR tracking. Notion is too complex. Clear gap exists."
+4. Builds design system: dark minimal, Inter font, 0px radius
+5. Downloads bundle → drops into Windsurf
+
+**What He Gets:**
+- Competitor gap analysis with real Product Hunt data
+- `.cursorrules` file pre-configured for his stack
+- Granular dev plan: 40+ tasks from setup to deployment
+- Confidence score: 8.5/10 — strong market signal
+
+**Time saved:** Skip the "should I build this?" phase → **validated in 15 minutes**
+
+***
+
+## Use Case 3: The Design Agency
+
+**Who:** Meera's agency — builds MVPs for startup clients
+
+**Situation:**
+> *Client walks in: "We want a platform for freelance photographers to sell presets and editing tutorials."*
+
+**What They Do:**
+1. Run Architect during the client discovery call (live)
+2. Client answers MCQ questions themselves → instant alignment
+3. Research phase shown to client on screen — real competitor data
+4. Client picks design direction from 3 visual options
+5. Both download the bundle at end of meeting
+
+**What They Get:**
+- PRD the client has already "approved" (they answered the questions)
+- Design system ready to hand to developers
+- Technical spec reduces back-and-forth with dev team
+- Validation report to justify build decisions to client
+
+**Time saved:** Discovery → spec usually takes 1 week → **done in 1 meeting**
+
+***
+
+## Use Case 4: The Student / First-Time Builder
+
+**Who:** Rahul, 21 — CS student, first real project
+
+**Situation:**
+> *"I want to build something for my portfolio. Maybe a habit tracker but smarter — it uses AI to suggest habits based on your goals."*
+
+**What He Does:**
+1. Opens Architect → describes the idea loosely
+2. MCQ interview helps him clarify his own thinking
+3. Research shows: "Habitica and Streaks exist but no AI personalization layer — strong differentiator"
+4. Uses design builder to pick colors and components → learns what a design system is
+5. Downloads bundle → opens in Cursor for the first time
+
+**What He Gets:**
+- His first ever proper PRD (he didn't know what one was before)
+- Database schema already written — doesn't have to figure it out
+- A build plan that teaches him the right order to code things
+- Portfolio project with real market research backing it
+
+**Time saved:** Months of "where do I even start?" → **clear path in 20 minutes**
+
+***
+
+## The Common Thread
+
+| | Priya | Arjun | Meera | Rahul |
+|---|---|---|---|---|
+| **Started with** | Vague idea | Product concept | Client brief | Portfolio project |
+| **Needed** | Validation + spec | Fast research | Client alignment | Direction |
+| **Got** | Full bundle | Competitor gaps | Live PRD | First real spec |
+| **Time** | 20 min | 15 min | 1 meeting | 20 min |
+| **Cost** | $0 | $0 | $0 | $0 |

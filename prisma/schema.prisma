@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+}
+
+model Project {
+  id              String        @id @default(cuid())
+  rawIdea         String
+  status          ProjectStatus @default(INTERVIEWING)
+  interviewData   Json?
+  researchData   Json?
+  validationReport Json?
+  designSystem    Json?
+  bundleMarkdown  String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+}
+
+enum ProjectStatus {
+  INTERVIEWING
+  RESEARCHING
+  DESIGNING
+  COMPLETE
+}

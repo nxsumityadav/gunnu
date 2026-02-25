@@ -1,0 +1,174 @@
+Here's the full MVP blueprint for **Architect** — scoped to your exact stack (no auth, Tavily + Groq + Routeway, Netlify free + Neon free):
+
+***
+
+## The MVP Scope (Phase 1 + 2 only)
+
+For now, the goal is: **Raw idea → Deep interrogation → Live research → PRD + Validation Report**. No auth, no payments, sessions managed by UUID cookie only.
+
+***
+
+## 🧱 Tech Stack Breakdown
+
+| Layer | Tool | Purpose |
+|---|---|---|
+| LLM Brain | **Groq API** (llama3-70b or mixtral-8x7b) | All agent reasoning + streaming responses |
+| Web Research | **Tavily Search API** | Live search: Reddit, Product Hunt, Google Trends |
+| Routing | **Routeway** | Multi-agent orchestration (Conductor → PM → Research) |
+| Database | **Neon** (PostgreSQL free) | Sessions, Foundation Docs, Validation Reports |
+| Frontend | **Next.js → Netlify** | Chat UI + Report viewer |
+| Auth | ❌ None | UUID cookie per session |
+
+***
+
+## 🔄 Routeway Agent Routing Logic
+
+The **Conductor Agent** (Groq) reads session state and routes to the right specialist:
+
+```
+User Input
+    │
+    ▼
+[Conductor Agent] ← Groq
+    │
+    ├── "needs_more_questions" → [PM Agent] → asks next structured question
+    ├── "interrogation_complete" → [Research Agent] → fires Tavily queries
+    ├── "research_done" → [Design Agent] → (Phase 3, future)
+    └── "design_approved" → [Tech Spec Agent] → (Phase 4, future)
+```
+
+Conductor system prompt core:
+```
+You are the Conductor. Given session state + last user message, decide 
+which agent runs next. Output ONLY JSON: 
+{ "route": "pm_agent" | "research_agent" | "done" }
+```
+
+***
+
+## Phase 1 — PM Agent (Deep Interrogation)
+
+The **PM Agent** (Groq) asks 8 structured questions one at a time, streaming responses:
+
+1. What's the single biggest pain point your product solves?
+2. Who is your primary user? (one sentence)
+3. What is the ONE action a user must do on Day 1?
+4. Web app, mobile app, or both?
+5. Do you need accounts / real-time features / payments?
+6. Who are 2–3 indirect competitors you've noticed?
+7. What should the user FEEL when using this? (calm, powerful, fast?)
+8. Any visual brands or apps you admire aesthetically?
+
+**Output saved to Neon as `foundation_docs` JSONB:**
+```json
+{
+  "session_id": "uuid",
+  "idea_raw": "An app for book clubs to track shared highlights",
+  "pain_point": "No shared annotation layer across readers",
+  "primary_user": "Book club members aged 25–40",
+  "core_action": "Highlight a passage and share with club in real-time",
+  "platform": "Web app",
+  "competitors": ["Kindle highlights", "Readwise", "Goodreads"],
+  "desired_feel": "warm, literary, calm",
+  "visual_inspiration": ["Notion", "Readwise"]
+}
+```
+
+***
+
+## Phase 2 — Research Agent (Tavily + Groq)
+
+Auto-generates 4 Tavily queries from the Foundation Doc:
+- `"book club app problems site:reddit.com"`
+- `"shared reading highlights app Product Hunt"`
+- `"Readwise alternatives complaints"`
+- `"book club software market size 2025"`
+
+**Output rendered as Validation Report:**
+```
+📊 VALIDATION REPORT
+- 38 Reddit threads mention frustration with Goodreads' lack of real-time sharing
+- Product Hunt: 3 apps in this space, all rated <3.5 stars for collaboration
+- Key gap: No app offers group annotation + discussion in one view
+- Your differentiator: Real-time co-highlighting with threaded discussion
+- Market signal: "book club app" has 2.4x Google Trends growth in 18 months
+```
+
+***
+
+## 🗄️ Neon DB Schema (MVP)
+
+```sql
+CREATE TABLE sessions (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  created_at TIMESTAMP DEFAULT NOW(),
+  raw_idea TEXT,
+  status TEXT DEFAULT 'interrogation'
+);
+
+CREATE TABLE foundation_docs (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  session_id UUID REFERENCES sessions(id),
+  doc JSONB,
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE validation_reports (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  session_id UUID REFERENCES sessions(id),
+  report TEXT,
+  search_results JSONB,
+  created_at TIMESTAMP DEFAULT NOW()
+);
+```
+
+***
+
+## 🖥️ Frontend Pages (Next.js → Netlify)
+
+- **`/`** — Landing: "Describe your product idea" → text input → creates session UUID
+- **`/session/[id]`** — Streamed chat with PM Agent (Groq SSE)
+- **`/session/[id]/report`** — Clean PDF-style view of Foundation Doc + Validation Report
+
+***
+
+## 🚀 4-Week Build Sequence
+
+**Week 1 — Skeleton**
+- Init Next.js, deploy to Netlify, connect Neon DB, test Groq stream + Tavily call
+
+**Week 2 — PM Agent (Phase 1)**
+- Routeway Conductor routing, PM Agent 8-question loop, save Foundation Doc to Neon, render it on `/report`
+
+**Week 3 — Research Agent (Phase 2)**
+- Auto-generate Tavily queries from Foundation Doc, Groq summarizes results, save + render Validation Report
+
+**Week 4 — Polish + Ship**
+- Error handling, mobile responsiveness, session sharing via URL, record demo
+
+***
+
+## 🔑 Environment Variables (Netlify)
+
+```
+GROQ_API_KEY=        # console.groq.com — free: 30 req/min
+TAVILY_API_KEY=      # app.tavily.com — free: 1000 searches/month
+DATABASE_URL=        # Neon PostgreSQL connection string
+ROUTEWAY_API_KEY=    # Routeway dashboard
+```
+
+***
+
+## Positioning vs. Competitors
+
+| Tool | Where it starts | What it skips |
+|---|---|---|
+| Cursor / Devin | After specs exist | Discovery, validation |
+| v0 / Bolt | After you know what to build | Research, strategy |
+| **Architect** | **Raw idea stage** | Nothing — it's the full journey |
+
+**Recommended name: Architect** — clean, brandable, signals what it does. Tagline: *"You have an idea. Architect turns it into a product."*
+
+***
+
+Want me to save this blueprint to your Notion workspace, or should I start generating the actual Next.js file structure and the Routeway agent config code next?
