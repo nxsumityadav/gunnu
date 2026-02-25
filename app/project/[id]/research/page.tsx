@@ -144,15 +144,24 @@ export default function ResearchPage() {
               <span className="flex h-5 w-5 shrink-0 items-center justify-center">
                 {statusIcon(steps[key])}
               </span>
-              <span className="relative flex-1 overflow-hidden">
-                {isActive(steps[key]) && (
-                  <motion.span
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/30 to-transparent"
-                    animate={{ x: ["-100%", "100%"] }}
-                    transition={{ duration: 1.8, repeat: Infinity, ease: "linear" }}
-                  />
+              <span className="flex-1">
+                {isActive(steps[key]) ? (
+                  <span
+                    className="inline-block text-transparent"
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(90deg, #888 0%, #888 35%, #fff 50%, #888 65%, #888 100%)",
+                      backgroundSize: "200% 100%",
+                      backgroundClip: "text",
+                      WebkitBackgroundClip: "text",
+                      animation: "shimmer-text 1.5s linear infinite",
+                    }}
+                  >
+                    {label}
+                  </span>
+                ) : (
+                  <span>{label}</span>
                 )}
-                <span className="relative z-10">{label}</span>
               </span>
               <span className="text-xs capitalize">{steps[key]}</span>
             </motion.div>

@@ -56,6 +56,15 @@
   --font-mono: var(--font-jetbrains-mono), monospace;
 }
 
+@keyframes shimmer-text {
+  from {
+    background-position: 200% 50%;
+  }
+  to {
+    background-position: 0% 50%;
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

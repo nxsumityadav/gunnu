@@ -9,7 +9,7 @@ export async function tavilySearch(
   query: string,
   apiKey: string
 ): Promise<TavilyResult[]> {
-  const trimmed = String(query || "").trim();
+  const trimmed = String(query || "").trim().slice(0, 400);
   if (trimmed.length < 4) {
     return [];
   }
