@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { motion } from "framer-motion";
-import { Header } from "@/components/layout/Header";
 import { ValidationReport } from "@/components/research/ValidationReport";
 import type { ValidationReport as ValidationReportType } from "@/lib/ai/synthesis";
 
@@ -104,8 +103,9 @@ export default function ResearchPage() {
 
   return (
     <div className="flex min-h-screen flex-col bg-bg">
-      <Header />
-      <main className="mx-auto flex w-full max-w-[720px] flex-1 flex-col gap-8 px-6 py-16">
+      <main
+        className={`mx-auto flex w-full max-w-[720px] flex-1 flex-col gap-8 px-6 py-16 ${report ? "items-start text-left" : "items-center text-center"}`}
+      >
         <h1 className="text-xl font-semibold text-primary">
           Researching your market...
         </h1>
@@ -130,7 +130,9 @@ export default function ResearchPage() {
           </motion.div>
         )}
 
-        <div className="flex flex-col gap-2">
+        <div
+          className={`flex flex-col gap-2 ${report ? "" : "items-center"}`}
+        >
           {STEPS.map(({ key, label }) => (
             <motion.div
               key={key}
@@ -144,6 +146,7 @@ export default function ResearchPage() {
               <span className="flex h-5 w-5 shrink-0 items-center justify-center">
                 {statusIcon(steps[key])}
               </span>
+              <span className="w-16 shrink-0 text-xs capitalize">{steps[key]}</span>
               <span className="flex-1">
                 {isActive(steps[key]) ? (
                   <span
@@ -163,7 +166,6 @@ export default function ResearchPage() {
                   <span>{label}</span>
                 )}
               </span>
-              <span className="text-xs capitalize">{steps[key]}</span>
             </motion.div>
           ))}
         </div>

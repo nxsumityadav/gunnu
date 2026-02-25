@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { getProject } from "@/lib/db-helpers";
-import { Header } from "@/components/layout/Header";
 import { ValidationReport } from "@/components/research/ValidationReport";
 import { RawResearchData } from "@/components/research/RawResearchData";
 import type { FoundationDoc } from "@/lib/types";
@@ -31,7 +30,6 @@ export default async function ReportPage({
 
   return (
     <div className="flex min-h-screen flex-col bg-bg">
-      <Header />
       <main className="mx-auto flex w-full max-w-[720px] flex-1 flex-col gap-8 px-6 py-16">
         <h1 className="text-xl font-semibold text-primary">
           Validation Report

@@ -1,5 +1,6 @@
 import { LandingHeader } from "@/components/landing/LandingHeader";
 import { HeroSection } from "@/components/landing/HeroSection";
+import { SparklesSection } from "@/components/landing/SparklesSection";
 import { ProblemSection } from "@/components/landing/ProblemSection";
 import { SolutionSection } from "@/components/landing/SolutionSection";
 import { FeaturesSection } from "@/components/landing/FeaturesSection";
@@ -14,6 +15,7 @@ export default function Home() {
       <LandingHeader />
       <main className="flex-1">
         <HeroSection />
+        <SparklesSection />
         <ProblemSection />
         <SolutionSection />
         <FeaturesSection />

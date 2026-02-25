@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { Header } from "@/components/layout/Header";
 import {
   COLOR_PRESETS,
   DEFAULT_DESIGN,
@@ -74,7 +73,6 @@ export default function DesignPage() {
   if (loading) {
     return (
       <div className="flex min-h-screen flex-col bg-bg">
-        <Header />
         <main className="mx-auto flex w-full max-w-[720px] flex-1 flex-col gap-8 px-6 py-16">
           <p className="text-muted-foreground">Loading...</p>
         </main>
@@ -84,7 +82,6 @@ export default function DesignPage() {
 
   return (
     <div className="flex min-h-screen flex-col bg-bg">
-      <Header />
       <main className="mx-auto flex w-full max-w-[900px] flex-1 flex-col gap-8 px-6 py-16">
         <h1 className="text-xl font-semibold text-primary">
           Design System Builder

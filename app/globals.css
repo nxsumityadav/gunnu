@@ -24,6 +24,8 @@
 }
 
 @theme inline {
+  --max-width-container: 1280px;
+  --animate-marquee: marquee var(--duration, 40s) linear infinite;
   --color-bg: var(--bg);
   --color-surface: var(--surface);
   --color-border: var(--border);
@@ -65,7 +67,28 @@
   }
 }
 
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap, 1rem)));
+  }
+}
+
 @layer base {
+  :root {
+    --gradient-color: #ffffff;
+    --sparkles-color: #ffffff;
+    --sparkles-gradient: #ffffff;
+  }
+
+  .dark {
+    --gradient-color: #ffffff;
+    --sparkles-color: #ffffff;
+    --sparkles-gradient: #ffffff;
+  }
+
   * {
     @apply border-border outline-ring/50;
     box-sizing: border-box;
