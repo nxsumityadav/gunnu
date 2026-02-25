@@ -141,37 +141,19 @@ export default function ResearchPage() {
                 opacity: steps[key] === "error" ? 0.6 : 1,
               }}
             >
-              <span className="relative flex h-5 w-5 shrink-0 items-center justify-center overflow-hidden rounded">
-                {isActive(steps[key]) && (
-                  <>
-                    <motion.span
-                      className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/40 to-transparent"
-                      animate={{
-                        x: ["-100%", "100%"],
-                      }}
-                      transition={{
-                        duration: 1.8,
-                        repeat: Infinity,
-                        ease: "linear",
-                      }}
-                    />
-                    <motion.span
-                      className="absolute inset-0 rounded-full bg-primary/10"
-                      animate={{
-                        opacity: [0.4, 0.9, 0.4],
-                        scale: [1, 1.15, 1],
-                      }}
-                      transition={{
-                        duration: 1.2,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                      }}
-                    />
-                  </>
-                )}
-                <span className="relative z-10">{statusIcon(steps[key])}</span>
+              <span className="flex h-5 w-5 shrink-0 items-center justify-center">
+                {statusIcon(steps[key])}
               </span>
-              <span className="flex-1">{label}</span>
+              <span className="relative flex-1 overflow-hidden">
+                {isActive(steps[key]) && (
+                  <motion.span
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/30 to-transparent"
+                    animate={{ x: ["-100%", "100%"] }}
+                    transition={{ duration: 1.8, repeat: Infinity, ease: "linear" }}
+                  />
+                )}
+                <span className="relative z-10">{label}</span>
+              </span>
               <span className="text-xs capitalize">{steps[key]}</span>
             </motion.div>
           ))}

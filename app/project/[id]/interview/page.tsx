@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { Header } from "@/components/layout/Header";
 import type { FoundationDoc } from "@/lib/types";
 import type { DynamicQuestion } from "@/lib/ai/questions";
 
@@ -283,8 +282,7 @@ export default function InterviewPage() {
   if (loadingQuestion && !question) {
     return (
       <div className="flex min-h-screen flex-col bg-bg">
-        <Header />
-        <main className="mx-auto flex w-full max-w-[720px] flex-1 flex-col gap-8 px-6 py-16">
+        <main className="mx-auto flex w-full max-w-[720px] flex-1 flex-col gap-8 px-6 pt-16 pb-16">
           <p className="text-muted-foreground">Loading question...</p>
         </main>
       </div>
@@ -294,8 +292,7 @@ export default function InterviewPage() {
   if (!question) {
     return (
       <div className="flex min-h-screen flex-col bg-bg">
-        <Header />
-        <main className="mx-auto flex w-full max-w-[720px] flex-1 flex-col gap-8 px-6 py-16">
+        <main className="mx-auto flex w-full max-w-[720px] flex-1 flex-col gap-8 px-6 pt-16 pb-16">
           <p className="text-muted-foreground">Failed to load question. Refresh to try again.</p>
         </main>
       </div>
@@ -304,8 +301,7 @@ export default function InterviewPage() {
 
   return (
     <div className="flex min-h-screen flex-col bg-bg">
-      <Header />
-      <main className="mx-auto flex w-full max-w-[720px] flex-1 flex-col gap-8 px-6 py-16">
+      <main className="mx-auto flex w-full max-w-[720px] flex-1 flex-col gap-8 px-6 pt-16 pb-16">
         <div className="flex items-center gap-4">
           <div className="flex gap-1">
             {QUESTION_IDS.map((_, i) => (

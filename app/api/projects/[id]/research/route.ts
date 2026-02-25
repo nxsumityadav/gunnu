@@ -23,7 +23,7 @@ export async function GET(
   const routewayBase = process.env.ROUTEWAY_BASE_URL;
   const groqKey = process.env.GROQ_API_KEY;
 
-  if (!tavilyKey) {
+  if (!tavilyKey?.trim()) {
     return new Response("Missing TAVILY_API_KEY", { status: 500 });
   }
   // Use Routeway if configured; fall back to Groq on failure (e.g. 402 insufficient credits)
@@ -75,15 +75,15 @@ export async function GET(
           marketTrends = cachedResearch.marketTrends;
         } else {
           send({ step: "tavily_1", status: "running" });
-          painPoints = await tavilySearch(queries.painPoints, tavilyKey);
+          painPoints = await tavilySearch(queries.painPoints, tavilyKey.trim());
           send({ step: "tavily_1", status: "done", data: painPoints });
 
           send({ step: "tavily_2", status: "running" });
-          competitors = await tavilySearch(queries.competitors, tavilyKey);
+          competitors = await tavilySearch(queries.competitors, tavilyKey.trim());
           send({ step: "tavily_2", status: "done", data: competitors });
 
           send({ step: "tavily_3", status: "running" });
-          marketTrends = await tavilySearch(queries.marketTrends, tavilyKey);
+          marketTrends = await tavilySearch(queries.marketTrends, tavilyKey.trim());
           send({ step: "tavily_3", status: "done", data: marketTrends });
         }
 
