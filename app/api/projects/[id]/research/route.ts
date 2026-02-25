@@ -1,5 +1,5 @@
 import { getProject, updateProjectResearch, savePartialResearch } from "@/lib/db-helpers";
-import { tavilySearch } from "@/lib/research/tavily";
+import { tavilySearch, type TavilyResult } from "@/lib/research/tavily";
 import { generateTavilyQueries } from "@/lib/research/queries";
 import { synthesizeReport } from "@/lib/ai/synthesis";
 import type { FoundationDoc } from "@/lib/types";
@@ -38,7 +38,7 @@ export async function GET(
   const foundationDoc = project.interviewData as FoundationDoc | null;
   const existingReport = project.validationReport;
   const cachedResearch = project.researchData as
-    | { painPoints?: unknown[]; competitors?: unknown[]; marketTrends?: unknown[] }
+    | { painPoints?: TavilyResult[]; competitors?: TavilyResult[]; marketTrends?: TavilyResult[] }
     | null;
 
   const stream = new ReadableStream({
@@ -57,9 +57,9 @@ export async function GET(
       }
 
       const queries = generateTavilyQueries(foundationDoc, idea);
-      let painPoints: unknown[];
-      let competitors: unknown[];
-      let marketTrends: unknown[];
+      let painPoints: TavilyResult[];
+      let competitors: TavilyResult[];
+      let marketTrends: TavilyResult[];
 
       try {
         if (

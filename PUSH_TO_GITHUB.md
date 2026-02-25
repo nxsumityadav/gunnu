@@ -33,4 +33,4 @@ gh repo create gunnu --public --source=. --push
 
 - Git initialized
 - All files committed
-- Remote set to `https://github.com/sk6246090/gunnu.git` (update if your username differs)
+- Remote set to `https://github.com/nxsumityadav/gunnu.git`

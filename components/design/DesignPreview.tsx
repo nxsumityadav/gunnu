@@ -7,7 +7,7 @@ interface DesignPreviewProps {
 }
 
 export function DesignPreview({ design }: DesignPreviewProps) {
-  const r = (key: keyof DesignSystem["radius"]) => design.radius[key];
+  const r = design.radius;
   const c = design.colors;
   const t = design.typography;
 
